@@ -4,24 +4,28 @@ import "../assets/bootstrap.min.css";
 
 const Header = () => {
     const logout = async (e) => {
-    e.preventDefault();
-    let logout_url = window.location.origin+"/djangoapp/logout";
-    const res = await fetch(logout_url, {
-      method: "GET",
-    });
-  
-    const json = await res.json();
-    if (json) {
-      let username = sessionStorage.getItem('username');
-      sessionStorage.removeItem('username');
-      window.location.href = window.location.origin;
-      window.location.reload();
-      alert("Logging out "+username+"...")
-    }
-    else {
-      alert("The user could not be logged out.")
-    }
-  };
+        e.preventDefault();
+        
+        let logout_url = window.location.origin + "/djangoapp/logout";
+        
+        const res = await fetch(logout_url, {
+            method: "POST",
+            credentials: "include",
+        });
+        
+        if (res.ok) {
+            const username = sessionStorage.getItem("username");
+            sessionStorage.removeItem("username");
+        
+            alert("Logging out " + username + "...");
+        
+            // volta pra página inicial DESLOGADA
+            window.location.href = window.location.origin;
+        } else {
+            alert("The user could not be logged out.");
+        }
+    };
+      
     
 //The default home page items are the login details panel
 let home_page_items =  <div></div>
