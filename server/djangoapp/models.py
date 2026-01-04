@@ -17,7 +17,6 @@ class CarMake(models.Model):
         return self.name
 
 
-
 # <HINT> Create a Car Model model `class CarModel(models.Model):`:
 class CarModel(models.Model):
     SEDAN = 'Sedan'
@@ -29,7 +28,6 @@ class CarModel(models.Model):
         (SUV, 'SUV'),
         (WAGON, 'Wagon'),
     ]
-
 
     car_make = models.ForeignKey(
         CarMake,
@@ -45,10 +43,9 @@ class CarModel(models.Model):
     )
     year = models.IntegerField()
 
-
     color = models.CharField(max_length=50, blank=True)
-    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    price = models.DecimalField(
+        max_digits=10, decimal_places=2, null=True, blank=True)
 
     def __str__(self):
         return f"{self.car_make.name} - {self.name}"
-
